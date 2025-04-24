@@ -9,7 +9,7 @@ from practice_package.sets import (
 )
 
 
-class TestSetsFunctions:   
+class TestSetsOperations:   
     
     @pytest.mark.parametrize("set1, set2, expected", [
         ({1, 2, 3}, {2, 3, 4}, {2, 3}),
