@@ -3,14 +3,14 @@ def sum_even_digits(number):
 
 
 def count_vowel_triplets(text):
-    vowels = set('aeiouy')  # Include 'y' as vowel, lowercase only
+    vowels = set('aeiouy')  
     count = 0
     text = text.lower()
     i = 0
     while i < len(text) - 2:
         if all(ch in vowels for ch in text[i:i + 3]):
             count += 1
-            i += 3  # Skip overlapping triplets
+            i += 1  # Count overlapping triplets
         else:
             i += 1
     return count

@@ -4,8 +4,15 @@ import copy
 
 def count_char_occurrences(text):
     from collections import Counter
-    filtered = [ch.lower() for ch in text if ch.isalpha()]
-    return dict(Counter(filtered))
+    import re
+    # Split text by spaces to keep hyphenated words intact
+    words = text.lower().split()
+    chars = []
+    for word in words:
+        # Remove non-alphabetic characters except hyphen
+        clean_word = re.sub(r'[^a-z-]', '', word)
+        chars.extend(clean_word)
+    return dict(Counter(chars))
 
 
 def merge_dicts(dict1, dict2, conflict_resolver):
@@ -84,6 +91,5 @@ def deep_update(base_dict, update_dict):
                 result[k] = deep_update(result[k], v)
             else:
                 result[k] = v
-        else:
-            result[k] = v
+        # Do not add new keys from update_dict
     return result
