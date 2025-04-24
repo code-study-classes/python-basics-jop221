@@ -1,5 +1,5 @@
 def square_odds(numbers):
-    return [x*x for x in numbers if x % 2 != 0]
+    return [x * x for x in numbers if x % 2 != 0]
 
 
 def normalize_names(names):
@@ -26,7 +26,7 @@ def calculate_factorial(n):
     if n == 0:
         return 1
     result = 1
-    for i in range(1, n+1):
+    for i in range(1, n + 1):
         result *= i
     return result
 

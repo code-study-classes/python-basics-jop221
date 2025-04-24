@@ -4,16 +4,18 @@ def is_weekend(day):
 
 def get_discount(amount):
     if amount >= 5000:
-        return amount * 0.10
+        return round(amount * 0.10, 2)
     elif amount >= 1000:
-        return amount * 0.05
+        return round(amount * 0.05, 2)
     else:
         return 0
 
 
 def describe_number(n):
     parity = "четное" if n % 2 == 0 else "нечетное"
-    if 1 <= n <= 9:
+    if n == 0:
+        digits = "однозначное"
+    elif 1 <= n <= 9:
         digits = "однозначное"
     elif 10 <= n <= 99:
         digits = "двузначное"
@@ -35,8 +37,15 @@ def convert_to_meters(unitNumber, lengthInUnits):
 
 def describe_age(age):
     # Russian number to words for 20-100 (simplified)
-    ones = ["", "один", "два", "три", "четыре", "пять", "шесть", "семь", "восемь", "девять"]
-    tens = ["", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто", "сто"]
+    ones = [
+        "", "один", "два", "три", "четыре", "пять",
+        "шесть", "семь", "восемь", "девять"
+    ]
+    tens = [
+        "", "десять", "двадцать", "тридцать", "сорок",
+        "пятьдесят", "шестьдесят", "семьдесят",
+        "восемьдесят", "девяносто", "сто"
+    ]
 
     def age_to_words(n):
         if n == 100:

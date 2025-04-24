@@ -1,3 +1,7 @@
+
+import copy
+
+
 def count_char_occurrences(text):
     from collections import Counter
     filtered = [ch.lower() for ch in text if ch.isalpha()]
@@ -26,7 +30,6 @@ def invert_dictionary(original_dict):
 
 
 def dict_to_table(data_dict, columns):
-    # Prepare header
     headers = [col.upper() for col in columns]
     rows = []
     for key in data_dict:
@@ -36,23 +39,45 @@ def dict_to_table(data_dict, columns):
             row.append(str(val))
         rows.append(row)
 
-    # Calculate column widths
-    col_widths = [max(len(headers[i]), max(len(row[i]) for row in rows)) if rows else len(headers[i]) for i in range(len(columns))]
+    col_widths = [
+        max(
+            len(headers[i]),
+            max(len(row[i]) for row in rows)
+        ) if rows else len(headers[i])
+        for i in range(len(columns))
+    ]
 
-    # Build table string
     lines = []
-    header_line = "| " + " | ".join(headers[i].ljust(col_widths[i]) for i in range(len(columns))) + " |"
+    header_line = (
+        "| "
+        + " | ".join(
+            headers[i].ljust(col_widths[i]) for i in range(len(columns))
+        )
+        + " |"
+    )
     lines.append(header_line)
-    separator_line = "|" + "|".join("-" * (col_widths[i] + 2) for i in range(len(columns))) + "|"
+    separator_line = (
+        "|"
+        + "|".join(
+            "-" * (col_widths[i] + 2) for i in range(len(columns))
+        )
+        + "|"
+    )
     lines.append(separator_line)
     for row in rows:
-        line = "| " + " | ".join(row[i].ljust(col_widths[i]) for i in range(len(columns))) + " |"
+        line = (
+            "| "
+            + " | ".join(
+                row[i].ljust(col_widths[i]) for i in range(len(columns))
+            )
+            + " |"
+        )
         lines.append(line)
     return "\n".join(lines)
 
 
 def deep_update(base_dict, update_dict):
-    result = base_dict.copy()
+    result = copy.deepcopy(base_dict)
     for k, v in update_dict.items():
         if k in result:
             if isinstance(result[k], dict) and isinstance(v, dict):
